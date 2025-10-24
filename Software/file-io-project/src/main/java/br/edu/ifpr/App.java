@@ -9,7 +9,7 @@ import java.util.Scanner;
 import br.edu.ifpr.utils.FileManager;
 
 public class App {
-    private static final Path FILE_PATH = Paths.get("data", "notes.txt");
+    private static Path FILE_PATH = Paths.get("data", "notes.txt"); // Path caminho = Paths.get("pasta", "nomeArquivo");
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -27,12 +27,18 @@ public class App {
 
             switch (option) {
                 case "1" -> {
+                    System.out.println("Nome do novo arquivo: ");
+                    String nome = scanner.nextLine();
+                    FILE_PATH = Paths.get("data", nome);
                     System.out.print("Digite o texto: ");
                     String text = scanner.nextLine();
                     FileManager.write(text + System.lineSeparator(), FILE_PATH);
                     System.out.println("Arquivo criado ou reescrito com sucesso!");
                 }
                 case "2" -> {
+                    System.out.println("Nome do arquivo: ");
+                    String nome = scanner.nextLine();
+                    FILE_PATH = Paths.get("data", nome);
                     System.out.print("Texto para adicionar: ");
                     String text = scanner.nextLine();
                     FileManager.append(text + System.lineSeparator(), FILE_PATH);
@@ -57,6 +63,12 @@ public class App {
                 case "5" -> {
                     System.out.println("Leitura via Stream:");
                     FileManager.readStream(FILE_PATH);
+                }
+                case "6" -> {
+                    System.out.println("Nome do novo arquivo: ");
+                    String nome = scanner.nextLine();
+                    FILE_PATH = Paths.get("data", nome);
+                    
                 }
                 case "0" -> {
                     System.out.println("Encerrando programa...");
